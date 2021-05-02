@@ -1,5 +1,12 @@
 body {
+  font-family: Open Sans;
   margin: 0;
+}
+
+.if0 {
+  height: 30px;
+  width: 100%;
+  background-color: #f1f1f1;
 }
 
 .chatbot {
@@ -10,6 +17,7 @@ body {
   z-index: 9;
   width: 304px;
   height: 52px;
+  background-color: white;
 }
 
 .header-row {
@@ -33,15 +41,14 @@ body {
 
 .header {
   background: #19882c;
-  height: 198px;
-  width: 100%;
+  height: 146px;
   box-shadow: 0 36px 0 0 #0a5517;
   display: flex;
   align-items: center;
 }
 
 .logo {
-  margin-left: 88px;
+  margin-left: 77px;
 }
 
 .menuLateral {
@@ -60,7 +67,7 @@ body {
 .cabecalho {
   margin-top: 68px;
   background: #c4c4c4;
-  width: 1036px;
+  min-width: 1036px;
   height: 207px;
 }
 
