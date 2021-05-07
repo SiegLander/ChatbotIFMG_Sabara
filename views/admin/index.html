@@ -10,6 +10,12 @@
       rel="stylesheet"
     />
     <link rel="icon" href="../../public/images/ifmg.png" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../public/js/login.js"></script>
   </head>
   <body>
     <div class="if0"></div>
@@ -24,12 +30,12 @@
       </div>
       <div class="form">
         <p class="titulo">Acesso ao chatbot</p>
-        <form class="login-form" action="funcionalidade.html">
-          <input type="text" placeholder="Número de identificação" />
-          <input type="password" placeholder="Senha" />
-          <button value="Submit">Entrar</button>
+        <div class="login-form">
+          <input id="numId" type="text" placeholder="Número de identificação" />
+          <input id="pass" type="password" placeholder="Senha" />
+          <button onclick="auth()">Entrar</button>
           <p class="message"><a href="#">Esqueceu a senha</a></p>
-        </form>
+        </div>
       </div>
     </div>
   </body>

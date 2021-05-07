@@ -1,0 +1,23 @@
+{
+  "name": "chatbotifmg_sabara",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiegLander/ChatbotIFMG_Sabara.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SiegLander/ChatbotIFMG_Sabara/issues"
+  },
+  "homepage": "https://github.com/SiegLander/ChatbotIFMG_Sabara#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
