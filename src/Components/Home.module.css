@@ -1,0 +1,43 @@
+.adm{
+    color: white;
+    top:-1.6rem;
+    position: relative;
+    text-transform: uppercase;
+}
+.nav{
+    display: flex;
+    margin:0 10px;
+    justify-content: space-between;
+
+}
+
+.menuLateral {
+    background: #c4c4c4;
+    margin-left: 3rem;
+    margin-top: 68px;
+    width: 174px;
+    height: 752px;
+    margin-right: 10px;
+  }
+  
+  .main {
+    display: grid;
+    grid-template-columns:1fr 3fr;
+   
+  }
+  
+  .cabecalho {
+    margin-top: 68px;
+    background: #c4c4c4;
+    min-width: 80%;
+    height: 207px;
+  }
+  
+  .conteudo {
+    margin-top: 20px;
+    background: #c4c4c4;
+    min-width: 80%;
+    height: 428px;
+  
+  }
+  
