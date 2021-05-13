@@ -2,12 +2,29 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import loginrca from "./img/imagem.jpg";
 import styles from "./Login.module.css";
+import $ from "jquery";
 
 const Login = () => {
   const navigate = useNavigate();
-  function handleSubmit(event) {
-    event.preventDefault();
-    navigate("../funcionalidade");
+
+  function auth() {
+    const url = "http://localhost:3000/auth";
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        numId: $("#numId").val(),
+        pass: $("#pass").val(),
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((ret) => {
+        if (ret) {
+          navigate("../funcionalidade");
+        } else {
+          alert("Errou o login!");
+        }
+      });
   }
 
   return (
@@ -20,10 +37,10 @@ const Login = () => {
       </div>
       <div className={styles.form}>
         <p className={styles.titulo}>Acesso ao chatbot</p>
-        <form onSubmit={handleSubmit} className={styles.loginform}>
-          <input type="text" placeholder="Número de identificação" />
-          <input type="password" placeholder="Senha" />
-          <button>Entrar</button>
+        <form className={styles.loginform}>
+          <input id="numId" type="text" placeholder="Número de identificação" />
+          <input id="pass" type="password" placeholder="Senha" />
+          <button onClick={auth}>Entrar</button>
           <p className={styles.message}>
             <p>Esqueceu a senha</p>
           </p>

@@ -6,9 +6,6 @@ const Home = () => {
   return (
     <>
       <nav className={styles.nav}>
-        <Link className={styles.adm} to="/">
-          Inicio
-        </Link>
         <Link className={styles.adm} to="/login">
           Administrativo
         </Link>

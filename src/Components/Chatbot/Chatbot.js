@@ -60,25 +60,6 @@ const Chatbot = () => {
         <div className={styles.messageClient}>
           📅 Quero o calendário de 2021
         </div>
-        <div className={styles.footerSend}>
-          <input
-            className={styles.send}
-            type="text"
-            id="fname"
-            name="fname"
-            placeholder="Digite sua mensagem..."
-          />
-          <div className={styles.btnSend}>
-            <FontAwesomeIcon
-              icon="play"
-              style={{
-                color: "white",
-                fontSize: 15 + "px",
-                marginTop: 3 + "px",
-              }}
-            />
-          </div>
-        </div>
       </div>
     </>
   );

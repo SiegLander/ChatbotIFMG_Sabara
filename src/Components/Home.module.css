@@ -1,43 +1,51 @@
-.adm{
-    color: white;
-    top:-1.6rem;
-    position: relative;
-    text-transform: uppercase;
+.adm {
+  color: white;
+  top: -1.6rem;
+  position: relative;
+  text-transform: uppercase;
 }
-.nav{
-    display: flex;
-    margin:0 10px;
-    justify-content: space-between;
-
+.nav {
+  text-align: right;
+  margin: 0 50px;
 }
 
 .menuLateral {
-    background: #c4c4c4;
-    margin-left: 3rem;
-    margin-top: 68px;
-    width: 174px;
-    height: 752px;
-    margin-right: 10px;
-  }
-  
-  .main {
-    display: grid;
-    grid-template-columns:1fr 3fr;
-   
-  }
-  
-  .cabecalho {
-    margin-top: 68px;
-    background: #c4c4c4;
-    min-width: 80%;
-    height: 207px;
-  }
-  
-  .conteudo {
-    margin-top: 20px;
-    background: #c4c4c4;
-    min-width: 80%;
-    height: 428px;
-  
-  }
-  
+  background: #c4c4c4;
+  margin-left: 3rem;
+  margin-top: 35px;
+  width: 174px;
+  height: 700px;
+  margin-right: 10px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 0.6fr 3fr;
+}
+
+.cabecalho {
+  margin-top: 35px;
+  background: #c4c4c4;
+  min-width: 80%;
+  height: 207px;
+  margin-bottom: 8px;
+}
+
+.conteudo {
+  background: #c4c4c4;
+  min-width: 80%;
+  height: 428px;
+}
+
+h2 {
+  font-weight: bold !important;
+  margin-bottom: 0 !important;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.divisoria {
+  margin-right: 50px;
+}
