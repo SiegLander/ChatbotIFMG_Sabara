@@ -9,17 +9,12 @@ import { IconContext } from "react-icons";
 const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
 
-  const showSidebar = () => setSidebar(!sidebar);
+  const showSidebar = () => setSidebar(false);
 
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
-        <div className={styles.navbar}>
-          <Link to="#" className={styles.menuBars}>
-            <FaIcons.FaBars onClick={showSidebar} />
-            MENU
-          </Link>
-        </div>
+        <div className={styles.navbar}></div>
         <nav
           className={
             !sidebar
