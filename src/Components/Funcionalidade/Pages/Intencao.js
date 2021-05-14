@@ -17,8 +17,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
 
-const Respostas = () => {
-  const baseURL = "http://localhost:3000/respostas";
+const Intencao = () => {
+  const baseURL = "http://localhost:3000/intencoes";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -153,8 +153,8 @@ const Respostas = () => {
     <>
       <PageHeader
         className="site-page-header"
-        title="Resposta"
-        subTitle="Digite a resposta"
+        title="Intenções"
+        subTitle="Digite a intenção"
         style={{ marginLeft: 260 + "px" }}
       />
 
@@ -195,7 +195,7 @@ const Respostas = () => {
       ></Table>
 
       <Modal
-        title="Editar resposta"
+        title="Editar Intenções"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -217,4 +217,4 @@ const Respostas = () => {
   );
 };
 
-export default Respostas;
+export default Intencao;

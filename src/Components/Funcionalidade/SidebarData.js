@@ -28,7 +28,7 @@ export const SidebarData = [
     icon: <AiIcons.AiTwotoneFolderOpen />,
     cName: "nav-text",
   },
-  {
+  /*  {
     title: "Histórico",
     path: "/funcionalidade/historico",
     icon: <FaIcons.FaHistory />,
@@ -39,7 +39,7 @@ export const SidebarData = [
     path: "/funcionalidade/lixeira",
     icon: <FaIcons.FaTrashAlt />,
     cName: "nav-text",
-  },
+  },*/
   {
     title: "Sair",
     path: "/login",

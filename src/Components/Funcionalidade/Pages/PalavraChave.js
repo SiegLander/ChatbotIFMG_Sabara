@@ -18,7 +18,7 @@ import axios from "axios";
 import React from "react";
 
 const PalavraChave = () => {
-  const baseURL = "http://localhost:3010/palavrachave";
+  const baseURL = "http://localhost:3000/palavrachave";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -94,7 +94,7 @@ const PalavraChave = () => {
   const onFinish = async (values) => {
     console.log(values);
     const id = new Date();
-    await axios.post("http://localhost:3010/palavrachave", {
+    await axios.post(baseURL, {
       nome: values.palavra,
     });
     getChaves();
