@@ -95,7 +95,7 @@ const Respostas = () => {
     console.log(values);
     const id = new Date();
     await axios.post(baseURL, {
-      nome: values.palavra,
+      texto_respostas: values.palavra,
     });
     getChaves();
     form.resetFields();
@@ -104,7 +104,7 @@ const Respostas = () => {
   const columns = [
     {
       title: "Nome",
-      dataIndex: "nome",
+      dataIndex: "texto_respostas",
       key: "name",
     },
     {
