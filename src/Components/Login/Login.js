@@ -8,23 +8,28 @@ const Login = () => {
   const navigate = useNavigate();
 
   function auth() {
-    const url = "http://localhost:3000/auth";
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        numId: $("#numId").val(),
-        pass: $("#pass").val(),
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((ret) => {
-        if (ret) {
-          navigate("../funcionalidade");
-        } else {
-          alert("Errou o login!");
-        }
-      });
+    if ($("#numId").val().length > 0 && $("#pass").val().length > 0) {
+      const url = "http://localhost:3000/auth";
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          numId: $("#numId").val(),
+          pass: $("#pass").val(),
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((ret) => {
+          if (ret) {
+            console.log("errou");
+            navigate("../funcionalidade");
+          } else {
+            alert("Errou o login!");
+          }
+        });
+    } else {
+      alert("Dados inválidos!");
+    }
   }
 
   return (
@@ -37,14 +42,19 @@ const Login = () => {
       </div>
       <div className={styles.form}>
         <p className={styles.titulo}>Acesso ao chatbot</p>
-        <form className={styles.loginform}>
-          <input id="numId" type="text" placeholder="Número de identificação" />
-          <input id="pass" type="password" placeholder="Senha" />
+        <div className={styles.loginform}>
+          <input
+            id="numId"
+            type="number"
+            placeholder="Número de identificação"
+            required
+          />
+          <input id="pass" type="password" placeholder="Senha" required />
           <button onClick={auth}>Entrar</button>
           <p className={styles.message}>
             <p>Esqueceu a senha</p>
           </p>
-        </form>
+        </div>
       </div>
     </>
   );
