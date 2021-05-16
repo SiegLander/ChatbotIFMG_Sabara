@@ -16,6 +16,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
+import * as AiIcons from "react-icons/ai";
 
 const Arquivos = () => {
   const baseURL = "http://localhost:3000/arquivos";
@@ -71,8 +72,12 @@ const Arquivos = () => {
   function handleCancel() {
     setIsModalVisible(false);
   }
-  async function onDelete(id) {
-    const res = await axios.delete(`${baseURL}/${id}`);
+  async function onDelete(id, caminho) {
+    const res = await axios.delete(`${baseURL}/${id}`, {
+      data: {
+        caminho: caminho,
+      },
+    });
     if (res.status === 200) {
       message.success("Lista deletada com sucesso");
     } else {
@@ -91,17 +96,46 @@ const Arquivos = () => {
     }
   }
 
+  var file = "";
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    file = e.target.files[0];
+    console.log("file:", file);
+  };
+
   const onFinish = async (values) => {
+    console.log(file);
+    const formData = new FormData();
+    formData.append("arquivo", file);
+    await axios.post(`${baseURL}/upload`, formData);
     console.log(values);
     const id = new Date();
     await axios.post(baseURL, {
-      nome: values.palavra,
+      nome: values.nome,
+      caminho: "storage/files/" + values.arquivo.split("\\")[2],
     });
     getChaves();
     form.resetFields();
   };
 
   const columns = [
+    {
+      title: "Arquivo",
+      dataIndex: "caminho",
+      key: "file",
+      render: (text, record) => {
+        return (
+          <>
+            <a
+              style={{ fontSize: "28px" }}
+              href={`http://localhost:3000/${text}`}
+              target="_blank"
+            >
+              <AiIcons.AiOutlineFolderView />
+            </a>
+          </>
+        );
+      },
+    },
     {
       title: "Nome",
       dataIndex: "nome",
@@ -127,13 +161,12 @@ const Arquivos = () => {
               <Popconfirm
                 placement="top"
                 title={`_ Confirma a exclusão ?`}
-                onConfirm={(e) => onDelete(record.id)}
+                onConfirm={(e) => onDelete(record.id, record.caminho)}
                 okText="Sim"
                 cancelText="Não"
               >
                 <Button icon={<FaTrash />} onClick={(e) => getId(record.id)} />
               </Popconfirm>
-              ,
             </Space>
           </>
         );
@@ -154,7 +187,7 @@ const Arquivos = () => {
       <PageHeader
         className="site-page-header"
         title="Arquivo"
-        subTitle="Digite o nome e o caminho do arquivo"
+        subTitle="Digite um nome e adicione um arquivo"
         style={{ marginLeft: 260 + "px" }}
       />
 
@@ -162,8 +195,9 @@ const Arquivos = () => {
         onFinish={onFinish}
         style={{ marginLeft: 260 + "px" }}
         form={form}
-        name="normal_login"
-        className="login-form"
+        name="normal_file"
+        encType="multipart/form-data"
+        className="file-form"
         initialValues={{
           remember: true,
         }}
@@ -171,10 +205,16 @@ const Arquivos = () => {
         <Row>
           <Col sm={19}>
             <Form.Item
-              name="palavra"
+              name="nome"
               rules={[{ required: true, message: "Campo Obrigatoria" }]}
             >
               <Input />
+            </Form.Item>
+            <Form.Item
+              name="arquivo"
+              rules={[{ required: true, message: "Campo Obrigatoria" }]}
+            >
+              <Input type="file" onChange={handleFileSelected} />
             </Form.Item>
           </Col>
           <Col sm={4}>
@@ -195,7 +235,7 @@ const Arquivos = () => {
       ></Table>
 
       <Modal
-        title="Editar Palavra Chave"
+        title="Editar Arquivo"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
