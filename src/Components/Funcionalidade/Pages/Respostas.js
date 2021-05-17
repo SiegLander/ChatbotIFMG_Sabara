@@ -10,6 +10,7 @@ import {
   Popconfirm,
   message,
   Modal,
+  Select,
 } from "antd";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -19,6 +20,9 @@ import React from "react";
 
 const Respostas = () => {
   const baseURL = "http://localhost:3000/respostas";
+  const baseURLIntencoes = "http://localhost:3000/intecoes";
+  const baseURLPalavras = "http://localhost:3000/palavrachave";
+  const baseURLArquivo = "http://localhost:3000/arquivos";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -169,12 +173,52 @@ const Respostas = () => {
         }}
       >
         <Row>
-          <Col sm={19}>
+          <Col sm={6}>
             <Form.Item
               name="palavra"
               rules={[{ required: true, message: "Campo Obrigatorio" }]}
             >
               <Input />
+            </Form.Item>
+          </Col>
+          <Col sm={2}>
+            <Form.Item
+              name="intencao"
+              rules={[{ required: true, message: "Campo Obrigatorio" }]}
+            >
+              <select>
+                <option selected value="laranja">
+                  Laranja
+                </option>
+                <option value="limao">Limão</option>
+                <option value="coco">Coco</option>
+                <option value="manga">Manga</option>
+              </select>
+            </Form.Item>
+          </Col>
+          <Col sm={2}>
+            <Form.Item
+              name="palavra_chave"
+              rules={[{ required: true, message: "Campo Obrigatorio" }]}
+            >
+              {/* <Select>
+                <Option value="lucy">lucy</Option>
+              </Select> */}
+            </Form.Item>
+          </Col>
+          <Col sm={2}>
+            <Form.Item
+              name="arquivo"
+              rules={[{ required: true, message: "Campo Obrigatorio" }]}
+            >
+              <select>
+                <option selected value="laranja">
+                  Laranja
+                </option>
+                <option value="limao">Limão</option>
+                <option value="coco">Coco</option>
+                <option value="manga">Manga</option>
+              </select>
             </Form.Item>
           </Col>
           <Col sm={4}>
