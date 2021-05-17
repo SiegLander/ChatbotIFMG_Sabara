@@ -23,15 +23,17 @@ const Arquivos = () => {
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [dadosPalavra, setDadosPalavra] = React.useState("");
+  const [dados, setdados] = React.useState("");
   const [idp, setIdp] = React.useState();
   const [nomeEd, setNomeEd] = React.useState();
+  const [caminhoEd, setCaminhoEd] = React.useState();
   const [form] = Form.useForm();
 
   React.useEffect(() => {
-    setIdp(dadosPalavra.id);
-    setNomeEd(dadosPalavra.nome);
-  }, [dadosPalavra]);
+    setIdp(dados.id);
+    setNomeEd(dados.nome);
+    setCaminhoEd(dados.caminho);
+  }, [dados]);
 
   const history = useNavigate();
 
@@ -58,8 +60,15 @@ const Arquivos = () => {
   }
 
   async function handleOk() {
+    if (file != "") {
+      const formData = new FormData();
+      formData.append("arquivo", file);
+      formData.append("caminho", caminhoEd);
+      await axios.post(`${baseURL}/upload`, formData);
+    }
     const res = await axios.put(`${baseURL}/${idp}`, {
       nome: nomeEd,
+      caminho: file != "" ? "storage/files/" + file.name : caminhoEd,
     });
     if (res.status == 200) {
       getChaves();
@@ -86,11 +95,13 @@ const Arquivos = () => {
     getChaves();
   }
   async function editar(id) {
+    file = "";
+    console.log(file);
     setIsModalVisible(true);
     const res = await axios.get(`${baseURL}/${id}`);
     if (res.status == 200) {
-      const palavras = res.data;
-      setDadosPalavra(palavras);
+      const arquivos = res.data;
+      setdados(arquivos);
     } else {
       console.log("error");
     }
@@ -240,16 +251,19 @@ const Arquivos = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Form>
+        <Form encType="multipart/form-data">
           <Form.Item>
             <Input
-              value={dadosPalavra.nome}
+              value={dados.nome}
               onChange={(event) =>
-                setDadosPalavra((palavra) => {
-                  return { ...palavra, nome: event.target.value };
+                setdados((arquivo) => {
+                  return { ...arquivo, nome: event.target.value };
                 })
               }
             ></Input>
+          </Form.Item>
+          <Form.Item>
+            <Input type="file" onChange={handleFileSelected} />
           </Form.Item>
         </Form>
       </Modal>
