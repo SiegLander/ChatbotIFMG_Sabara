@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
 import PalavraChave from "./PalavraChave";
+import * as AiIcons from "react-icons/ai";
 
 const { Option } = Select;
 const Respostas = () => {
@@ -133,18 +134,31 @@ const Respostas = () => {
     },
     {
       title: "Intencao",
-      dataIndex: "id_intencao",
+      dataIndex: "nomeIntencao",
       key: "age",
     },
     {
       title: "PalavraChave",
-      dataIndex: "id_PalavrasChave",
+      dataIndex: "nomePalavra",
       key: "age",
     },
     {
       title: "Caminho do Arquivo",
-      dataIndex: "Arquivo_id",
-      key: "age",
+      dataIndex: "caminho",
+      key: "file",
+      render: (text, record) => {
+        return (
+          <>
+            <a
+              style={{ fontSize: "28px" }}
+              href={`http://localhost:3000/${text}`}
+              target="_blank"
+            >
+              <AiIcons.AiOutlineFolderView />
+            </a>
+          </>
+        );
+      },
     },
     {
       title: "Criado em",
@@ -159,10 +173,10 @@ const Respostas = () => {
         return (
           <>
             <Space>
-              <Button
+              {/* <Button
                 icon={<FaEdit />}
                 onClick={(event) => editar(record.id)}
-              />
+              /> */}
               <Popconfirm
                 placement="top"
                 title={`_ Confirma a exclusão ?`}
@@ -177,14 +191,6 @@ const Respostas = () => {
           </>
         );
       },
-    },
-  ];
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      createIn: "23/12",
-      dataIndex: "03/12/2021 as 23:50",
     },
   ];
 
