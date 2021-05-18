@@ -25,6 +25,7 @@ const PalavraChave = () => {
   const [dadosPalavra, setDadosPalavra] = React.useState("");
   const [idp, setIdp] = React.useState();
   const [nomeEd, setNomeEd] = React.useState();
+
   const [form] = Form.useForm();
 
   React.useEffect(() => {

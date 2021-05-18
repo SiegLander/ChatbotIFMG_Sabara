@@ -17,31 +17,42 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
+import PalavraChave from "./PalavraChave";
 
+const { Option } = Select;
 const Respostas = () => {
-  const baseURL = "http://localhost:3000/respostas";
-  const baseURLIntencoes = "http://localhost:3000/intecoes";
-  const baseURLPalavras = "http://localhost:3000/palavrachave";
+  const baseURLPalavraChave = "http://localhost:3000/palavrachave";
+  const baseURLIntencoes = "http://localhost:3000/intencoes";
+  const baseURLRespostas = "http://localhost:3000/respostas";
   const baseURLArquivo = "http://localhost:3000/arquivos";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [dadosPalavra, setDadosPalavra] = React.useState("");
+
   const [idp, setIdp] = React.useState();
   const [nomeEd, setNomeEd] = React.useState();
+  const [intencoes, setIntecoes] = React.useState();
+  const [dadosPalavra, setDadosPalavra] = React.useState("");
+  const [arquivo, setArquivos] = React.useState("");
+  const [resposta, setResposta] = React.useState("");
+  const [textoResposta, setTextoResposta] = React.useState();
   const [form] = Form.useForm();
 
   React.useEffect(() => {
     setIdp(dadosPalavra.id);
-    setNomeEd(dadosPalavra.nome);
-  }, [dadosPalavra]);
+    setNomeEd(dadosPalavra.texto_respostas);
+  }, [dadosPalavra, textoResposta]);
 
   const history = useNavigate();
 
   async function getChaves() {
-    const res = await axios.get(baseURL);
-    const teste = res.data;
-    const chave = teste.map((item) => {
+    const resChave = await axios.get(baseURLPalavraChave);
+    const resIntencoes = await axios.get(baseURLIntencoes);
+    const resArquivo = await axios.get(baseURLArquivo);
+    const resResposta = await axios.get(baseURLRespostas);
+
+    const teste = resResposta.data;
+    const resposta = teste.map((item) => {
       item.criado_em = item.criado_em
         .substr(0, 10)
         .split("-")
@@ -49,8 +60,10 @@ const Respostas = () => {
         .join("/");
       return item;
     });
-    console.log(chave);
-    setChave(chave);
+    setResposta(resposta);
+    setChave(resChave.data);
+    setIntecoes(resIntencoes.data);
+    setArquivos(resArquivo.data);
   }
   React.useEffect(() => {
     getChaves();
@@ -60,9 +73,13 @@ const Respostas = () => {
     console.log(id);
   }
 
+  async function handleChange() {
+    console.log("Mudou");
+  }
+
   async function handleOk() {
-    const res = await axios.put(`${baseURL}/${idp}`, {
-      nome: nomeEd,
+    const res = await axios.put(`${baseURLRespostas}/${idp}`, {
+      texto_respostas: nomeEd,
     });
     if (res.status == 200) {
       getChaves();
@@ -76,7 +93,7 @@ const Respostas = () => {
     setIsModalVisible(false);
   }
   async function onDelete(id) {
-    const res = await axios.delete(`${baseURL}/${id}`);
+    const res = await axios.delete(`${baseURLRespostas}/${id}`);
     if (res.status === 200) {
       message.success("Lista deletada com sucesso");
     } else {
@@ -86,10 +103,11 @@ const Respostas = () => {
   }
   async function editar(id) {
     setIsModalVisible(true);
-    const res = await axios.get(`${baseURL}/${id}`);
+    const res = await axios.get(`${baseURLRespostas}/${id}`);
     if (res.status == 200) {
       const palavras = res.data;
       setDadosPalavra(palavras);
+      console.log(palavras);
     } else {
       console.log("error");
     }
@@ -97,9 +115,11 @@ const Respostas = () => {
 
   const onFinish = async (values) => {
     console.log(values);
-    const id = new Date();
-    await axios.post(baseURL, {
-      texto_respostas: values.palavra,
+    values.texto_respostas = textoResposta;
+    console.log(values);
+
+    await axios.post(baseURLRespostas, {
+      ...values,
     });
     getChaves();
     form.resetFields();
@@ -107,9 +127,24 @@ const Respostas = () => {
 
   const columns = [
     {
-      title: "Nome",
+      title: "Texto Resposta",
       dataIndex: "texto_respostas",
       key: "name",
+    },
+    {
+      title: "Intencao",
+      dataIndex: "id_intencao",
+      key: "age",
+    },
+    {
+      title: "PalavraChave",
+      dataIndex: "id_PalavrasChave",
+      key: "age",
+    },
+    {
+      title: "Caminho do Arquivo",
+      dataIndex: "Arquivo_id",
+      key: "age",
     },
     {
       title: "Criado em",
@@ -172,59 +207,69 @@ const Respostas = () => {
           remember: true,
         }}
       >
-        <Row>
-          <Col sm={6}>
-            <Form.Item
-              name="palavra"
-              rules={[{ required: true, message: "Campo Obrigatorio" }]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col sm={2}>
-            <Form.Item
-              name="intencao"
-              rules={[{ required: true, message: "Campo Obrigatorio" }]}
-            >
-              <select>
-                <option selected value="laranja">
-                  Laranja
-                </option>
-                <option value="limao">Limão</option>
-                <option value="coco">Coco</option>
-                <option value="manga">Manga</option>
-              </select>
-            </Form.Item>
-          </Col>
-          <Col sm={2}>
-            <Form.Item
-              name="palavra_chave"
-              rules={[{ required: true, message: "Campo Obrigatorio" }]}
-            >
-              {/* <Select>
-                <Option value="lucy">lucy</Option>
-              </Select> */}
-            </Form.Item>
-          </Col>
-          <Col sm={2}>
-            <Form.Item
-              name="arquivo"
-              rules={[{ required: true, message: "Campo Obrigatorio" }]}
-            >
-              <select>
-                <option selected value="laranja">
-                  Laranja
-                </option>
-                <option value="limao">Limão</option>
-                <option value="coco">Coco</option>
-                <option value="manga">Manga</option>
-              </select>
-            </Form.Item>
-          </Col>
-          <Col sm={4}>
-            <Button htmlType="submit">Enviar</Button>
-          </Col>
-        </Row>
+        <Form.Item
+          name="id_intencao"
+          rules={[{ required: true, message: "Campo Obrigatorio" }]}
+        >
+          <Select
+            onChange={handleChange}
+            placeholder="Selecione a Intenção"
+            style={{ width: 280 }}
+          >
+            {intencoes &&
+              intencoes.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.nome}
+                </Option>
+              ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="id_PalavrasChave"
+          rules={[{ required: true, message: "Campo Obrigatorio" }]}
+        >
+          <Select
+            onChange={handleChange}
+            placeholder="Selecione a palavra chave"
+            style={{ width: 280 }}
+          >
+            {chave &&
+              chave.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.nome}
+                </Option>
+              ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          name="Arquivo_id"
+          rules={[{ required: true, message: "Campo Obrigatorio" }]}
+        >
+          <Select
+            onChange={handleChange}
+            placeholder="Selecione o arquivo"
+            style={{ width: 280 }}
+          >
+            {arquivo &&
+              arquivo.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.nome}
+                </Option>
+              ))}
+          </Select>
+        </Form.Item>
+        <Form.Item>
+          <Input
+            value={textoResposta}
+            onChange={(event) => setTextoResposta(event.target.value)}
+          ></Input>
+        </Form.Item>
+
+        <Col sm={4}>
+          <Button htmlType="submit">Enviar</Button>
+        </Col>
       </Form>
 
       <Table
@@ -233,13 +278,13 @@ const Respostas = () => {
           showSizeChanger: true,
           pageSizeOptions: ["4", "8", "12"],
         }}
-        dataSource={chave}
+        dataSource={resposta}
         columns={columns}
         style={{ marginLeft: 260 + "px" }}
       ></Table>
 
       <Modal
-        title="Editar resposta"
+        title="Editar Texto Resposta"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -247,10 +292,10 @@ const Respostas = () => {
         <Form>
           <Form.Item>
             <Input
-              value={dadosPalavra.nome}
+              value={dadosPalavra.texto_respostas}
               onChange={(event) =>
                 setDadosPalavra((palavra) => {
-                  return { ...palavra, nome: event.target.value };
+                  return { ...palavra, texto_respostas: event.target.value };
                 })
               }
             ></Input>
