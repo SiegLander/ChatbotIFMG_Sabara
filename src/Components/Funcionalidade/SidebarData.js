@@ -28,18 +28,18 @@ export const SidebarData = [
     icon: <AiIcons.AiTwotoneFolderOpen />,
     cName: "nav-text",
   },
-  /*  {
+  {
     title: "Histórico",
     path: "/funcionalidade/historico",
     icon: <FaIcons.FaHistory />,
     cName: "nav-text",
   },
   {
-    title: "Lixeira",
-    path: "/funcionalidade/lixeira",
-    icon: <FaIcons.FaTrashAlt />,
+    title: "Avaliações",
+    path: "/funcionalidade/avaliacoes",
+    icon: <FaIcons.FaFileSignature />,
     cName: "nav-text",
-  },*/
+  },
   {
     title: "Sair",
     path: "/login",
