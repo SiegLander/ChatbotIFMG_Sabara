@@ -13,9 +13,11 @@
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.15.4",
     "axios": "^0.21.1",
+    "express": "^4.17.1",
     "gh-pages": "^3.1.0",
     "history": "^5.0.0",
     "jquery": "^3.6.0",
+    "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -26,7 +28,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server",
+    "postinstall": "npm run build",
     "build": "set \"CI=false\" && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

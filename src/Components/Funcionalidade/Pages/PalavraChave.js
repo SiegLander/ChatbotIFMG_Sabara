@@ -18,7 +18,7 @@ import axios from "axios";
 import React from "react";
 
 const PalavraChave = () => {
-  const baseURL = "http://localhost:3000/palavrachave";
+  const baseURL = "http://chatifmg-com.umbler.net/palavrachave";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
