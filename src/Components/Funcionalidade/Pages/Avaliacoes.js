@@ -79,9 +79,9 @@ const Avaliacoes = () => {
     getChaves();
   }
 
-  async function visualizar(id) {
-    const res = await axios.get(`${baseURLArquivo}/${id}`);
-    window.open("http://localhost:3000/" + res.data.caminho, "_blank");
+  async function visualizar(caminho, id) {
+    console.log(caminho);
+    window.open("http://localhost:3000/" + caminho, "_blank");
     const resLido = await axios.put(`${baseURL}Lido/${id}`);
   }
 
@@ -120,28 +120,31 @@ const Avaliacoes = () => {
             <Space>
               <Button
                 icon={<FaEye />}
-                onClick={(event) => visualizar(record.id)}
+                onClick={(event) => visualizar(record.caminho, record.evalId)}
               />
               <Popconfirm
                 placement="top"
                 title={`_ Confirma a finalização ?`}
-                onConfirm={(e) => finalizar(record.id)}
+                onConfirm={(e) => finalizar(record.evalId)}
                 okText="Sim"
                 cancelText="Não"
               >
                 <Button
                   icon={<FaCheck />}
-                  onClick={(event) => getId(record.id)}
+                  onClick={(event) => getId(record.evalId)}
                 />
               </Popconfirm>
               <Popconfirm
                 placement="top"
                 title={`_ Confirma a exclusão ?`}
-                onConfirm={(e) => onDelete(record.id)}
+                onConfirm={(e) => onDelete(record.evalId)}
                 okText="Sim"
                 cancelText="Não"
               >
-                <Button icon={<FaTrash />} onClick={(e) => getId(record.id)} />
+                <Button
+                  icon={<FaTrash />}
+                  onClick={(e) => getId(record.evalId)}
+                />
               </Popconfirm>
               ,
             </Space>

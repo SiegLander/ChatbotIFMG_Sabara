@@ -98,7 +98,7 @@
 }
 
 .messageClient {
-  margin-top: 36px;
+  margin-top: 20px;
   padding: 3%;
   width: 265px;
   background: #ffffff;
@@ -109,7 +109,7 @@
   font-weight: normal;
   font-size: 11px;
   line-height: 15px;
-  margin-left: 12px;
+  margin-left: 9px;
 }
 
 .gridBot {
