@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const cors = require("cors");
+app.use(cors());
+app.options("*", cors());
 
 const configs = {
   caminho: "build", //Aqui será definido a pasta de saída onde contém o index.html e os outros arquivos.
