@@ -19,7 +19,7 @@ import React from "react";
 import * as AiIcons from "react-icons/ai";
 
 const Arquivos = () => {
-  const baseURL = "http://localhost:3000/arquivos";
+  const baseURL = "http://chatifmg-com.umbler.net/arquivos";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -138,7 +138,7 @@ const Arquivos = () => {
           <>
             <a
               style={{ fontSize: "28px" }}
-              href={`http://localhost:3000/${text}`}
+              href={`http://chatifmg-com.umbler.net/${text}`}
               target="_blank"
             >
               <AiIcons.AiOutlineFolderView />

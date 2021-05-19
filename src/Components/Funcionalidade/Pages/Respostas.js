@@ -22,10 +22,10 @@ import * as AiIcons from "react-icons/ai";
 
 const { Option } = Select;
 const Respostas = () => {
-  const baseURLPalavraChave = "http://localhost:3000/palavrachave";
-  const baseURLIntencoes = "http://localhost:3000/intencoes";
-  const baseURLRespostas = "http://localhost:3000/respostas";
-  const baseURLArquivo = "http://localhost:3000/arquivos";
+  const baseURLPalavraChave = "http://chatifmg-com.umbler.net/palavrachave";
+  const baseURLIntencoes = "http://chatifmg-com.umbler.net/intencoes";
+  const baseURLRespostas = "http://chatifmg-com.umbler.net/respostas";
+  const baseURLArquivo = "http://chatifmg-com.umbler.net/arquivos";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -151,7 +151,7 @@ const Respostas = () => {
           <>
             <a
               style={{ fontSize: "28px" }}
-              href={`http://localhost:3000/${text}`}
+              href={`http://chatifmg-com.umbler.net/${text}`}
               target="_blank"
             >
               <AiIcons.AiOutlineFolderView />

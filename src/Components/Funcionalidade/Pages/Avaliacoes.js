@@ -18,8 +18,8 @@ import axios from "axios";
 import React from "react";
 
 const Avaliacoes = () => {
-  const baseURL = "http://localhost:3000/avaliacoes";
-  const baseURLArquivo = "http://localhost:3000/arquivos";
+  const baseURL = "http://chatifmg-com.umbler.net/avaliacoes";
+  const baseURLArquivo = "http://chatifmg-com.umbler.net/arquivos";
 
   const [chave, setChave] = React.useState([]);
   const [dados, setDados] = React.useState("");
@@ -81,7 +81,7 @@ const Avaliacoes = () => {
 
   async function visualizar(caminho, id) {
     console.log(caminho);
-    window.open("http://localhost:3000/" + caminho, "_blank");
+    window.open("http://chatifmg-com.umbler.net/" + caminho, "_blank");
     const resLido = await axios.put(`${baseURL}Lido/${id}`);
   }
 

@@ -18,7 +18,7 @@ import axios from "axios";
 import React from "react";
 
 const Intencao = () => {
-  const baseURL = "http://localhost:3000/intencoes";
+  const baseURL = "http://chatifmg-com.umbler.net/intencoes";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);

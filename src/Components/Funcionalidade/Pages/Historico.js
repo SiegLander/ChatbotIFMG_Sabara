@@ -19,8 +19,8 @@ import React from "react";
 import * as AiIcons from "react-icons/ai";
 
 const Historico = () => {
-  const baseURLUser = "http://localhost:3000/historicoUser";
-  const baseURLBot = "http://localhost:3000/historicoBot";
+  const baseURLUser = "http://chatifmg-com.umbler.net/historicoUser";
+  const baseURLBot = "http://chatifmg-com.umbler.net/historicoBot";
 
   const [chave, setChave] = React.useState([]);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -85,7 +85,7 @@ const Historico = () => {
           <>
             <a
               style={{ fontSize: "28px" }}
-              href={`http://localhost:3000/${text}`}
+              href={`http://chatifmg-com.umbler.net/${text}`}
               target="_blank"
             >
               <AiIcons.AiOutlineFolderView />

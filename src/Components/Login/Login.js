@@ -9,7 +9,7 @@ const Login = () => {
 
   function auth() {
     if ($("#numId").val().length > 0 && $("#pass").val().length > 0) {
-      const url = "http://localhost:3000/auth";
+      const url = "http://chatifmg-com.umbler.net/auth";
       fetch(url, {
         method: "POST",
         headers: { "Content-type": "application/json" },

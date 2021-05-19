@@ -9,10 +9,10 @@ import axios from "axios";
 
 const Chatbot = () => {
   const [icon, setIcon] = React.useState(true);
-  const baseURL = "http://localhost:3000/chatbot";
-  const baseURLRespostas = "http://localhost:3000/respostas";
-  const baseURLArquivos = "http://localhost:3000/arquivos";
-  const baseURLAvaliacoes = "http://localhost:3000/avaliacoes";
+  const baseURL = "http://chatifmg-com.umbler.net/chatbot";
+  const baseURLRespostas = "http://chatifmg-com.umbler.net/respostas";
+  const baseURLArquivos = "http://chatifmg-com.umbler.net/arquivos";
+  const baseURLAvaliacoes = "http://chatifmg-com.umbler.net/avaliacoes";
 
   function handleClick(event) {
     event.preventDefault();
@@ -78,7 +78,7 @@ const Chatbot = () => {
 
         downloadBtn.setAttribute(
           "href",
-          "http://localhost:3000/" + dados.caminho
+          "http://chatifmg-com.umbler.net/" + dados.caminho
         );
         downloadBtn.setAttribute("download", fileName);
         downloadBtn.setAttribute("target", "_blank");
